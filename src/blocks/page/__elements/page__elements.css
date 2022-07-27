@@ -1,0 +1,10 @@
+.page__elements {
+  max-width: 880px;
+  padding-bottom: 67px;
+}
+
+@media screen and (max-width: 767px) {
+  .page__elements {
+    padding-bottom: 48px;
+  }
+}

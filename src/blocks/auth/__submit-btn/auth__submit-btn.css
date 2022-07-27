@@ -1,0 +1,23 @@
+.auth__submit-btn {
+  margin: 216px 0 112px;
+  padding: 0;
+  width: 358px;
+  height: 50px;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: #000;
+  background: #fff;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 767px) {
+  .auth__submit-btn {
+    margin: 173px 0 77px;
+    width: 260px;
+    height: 46px;
+    font-size: 16px;
+    line-height: 19px;   
+  }
+}

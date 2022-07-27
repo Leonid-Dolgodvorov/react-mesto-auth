@@ -1,0 +1,8 @@
+.popup__image-on-screen {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-self: center;
+  margin: 0 auto;    
+}
