@@ -33,5 +33,24 @@ export const authorize = (password, email) => {
     }),
   })
     .then(returnResJson)
+    .then((data) => {
+      if (data.token) {
+        localStorage.setItem('jwt', data.jwt);
+        return data;
+      } else {
+        return;
+      }
+     }) 
 };
+
+export const getData = (token) => {
+  return fetch(`${BASE_URL}/users/me`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    }
+  })
+  .then(returnResJson)
+} 
 
