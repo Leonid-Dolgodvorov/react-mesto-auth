@@ -1,0 +1,13 @@
+.popup__tooltip-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 430px;
+  height: 330px;
+}
+
+@media screen and (max-width: 767px) {
+  .popup__tooltip-wrapper {
+    width: 280px;
+    height: 308px;
+  }
+}

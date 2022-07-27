@@ -11,3 +11,7 @@
   line-height: 17px;
   background: none;
 }
+
+.auth__input:focus {
+  outline: none;
+}

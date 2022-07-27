@@ -19,7 +19,7 @@ function EditProfilePopup(props) {
     }));
   };
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
     props.onUpdateProfileInfo({
       name: profileInfo.name,

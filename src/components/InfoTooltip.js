@@ -9,7 +9,7 @@ function InfoTooltip(props) {
       popup_type_${props.name} 
       ${props.isOpen ? 'popup_opened' : ''} 
     `}>
-      <div className="popup__container">
+      <div className="popup__container popup__tooltip-wrapper">
         {props.registrationResult ? (
           <>
             <img
@@ -17,7 +17,7 @@ function InfoTooltip(props) {
               alt="Вы успешно зарегистрировались!"
               className="popup__tooltip-image"
             />
-            <p className="popup__tooltip-message">
+            <p className="popup__tooltip-text">
               Вы успешно зарегистрировались!
             </p>
           </>
@@ -28,7 +28,7 @@ function InfoTooltip(props) {
               alt="Что-то пошло не так. Попробуйте ещё раз!"
               className="popup__tooltip-image"
             />
-            <p className="popup__tooltip-message">
+            <p className="popup__tooltip-text">
               Что-то пошло не так. Попробуйте ещё раз!
             </p>
           </>

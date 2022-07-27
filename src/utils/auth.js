@@ -7,29 +7,33 @@ function returnResJson(res) {
   return Promise.reject(`Ошибка: ${res.status}`);
 }
 
-export const register = (password, email) => {
+export const register = (email, password) => {
+  console.log(JSON.stringify({
+    email: email,
+    password: password,    
+  }))
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      password: password,
       email: email,
+      password: password,
     }),
   })
     .then(returnResJson)
 };
 
-export const authorize = (password, email) => {
+export const authorize = (email, password) => {
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      password: password,
       email: email,
+      password: password,
     }),
   })
     .then(returnResJson)

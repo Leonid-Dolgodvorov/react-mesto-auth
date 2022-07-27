@@ -49,6 +49,7 @@
 @import url(./blocks/popup/_opened/popup_opened.css);
 @import url(./blocks/popup/_type/popup_type_tooltip.css);
 @import url(./blocks/popup/__container/popup__container.css);
+@import url(./blocks/popup/__tooltip-wrapper/popup__tooltip-wrapper.css);
 @import url(./blocks/popup/__tooltip-image/popup__tooltip-image.css);
 @import url(./blocks/popup/__tooltip-text/popup__tooltip-text.css);
 @import url(./blocks/popup/__close-button/popup__close-button.css);

@@ -2,19 +2,20 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function Register(props) {
-  const [values, setValues] = React.useState({});
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setValues((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  }
 
-  function handleSubmit(e) {
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  }
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    props.onRegister(values.password, values.email);
+    props.onRegister(email, password);
   }
 
   return (
@@ -28,8 +29,8 @@ function Register(props) {
           placeholder="Email"
           autoComplete="off"
           required
-          value={values.email || ""}
-          onChange={handleChange}
+          value={email || ""}
+          onChange={handleEmailChange}
         />
         <input
           className="auth__input"
@@ -38,8 +39,8 @@ function Register(props) {
           placeholder="Пароль"
           autoComplete="off"
           required
-          value={values.password || ""}
-          onChange={handleChange}
+          value={password || ""}
+          onChange={handlePasswordChange}
         />
         <button className="auth__submit-btn " type="submit">
           Зарегистрироваться

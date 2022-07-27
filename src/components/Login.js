@@ -1,19 +1,20 @@
 import React from "react";
 
 function Login(props) {
-  const [values, setValues] = React.useState({});
+  const [email, setEmail] = React.useState("");
+  const [password, setpassword] = React.useState("");
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setValues((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  }
 
-  function handleSubmit(e) {
+  const handlePasswordChange = (e) => {
+    setpassword(e.target.value);
+  }
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    props.onLogin(values.password, values.email);
+    props.onLogin(email, password);
   }
 
   return (
@@ -28,8 +29,8 @@ function Login(props) {
             placeholder="Email"
             autoComplete="off"
             required
-            value={values.email || ""}
-            onChange={handleChange}
+            value={email || ""}
+            onChange={handleEmailChange}
           />
           <input
             className="auth__input"
@@ -38,8 +39,8 @@ function Login(props) {
             placeholder="Пароль"
             autoComplete="off"
             required
-            value={values.password || ""}
-            onChange={handleChange}
+            value={password || ""}
+            onChange={handlePasswordChange}
           />
           <button className="auth__submit-btn" type="submit">
             Войти

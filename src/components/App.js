@@ -136,9 +136,10 @@ function App() {
       .catch((err) => console.log(err));
   }
 
-  const handleRegistration = (password, email) => {
+  const handleRegistration = (email, password) => {
+    console.log(email, password)
     auth
-      .register(password, email)
+      .register(email, password)
       .then(() => {
         setRegistrationResult(false);
         history.push("/sign-in");
@@ -152,9 +153,9 @@ function App() {
       });
   };
 
-  const handleAuthorization = (password, email) => {
+  const handleAuthorization = (email, password) => {
     auth
-      .authorize(password, email)
+      .authorize(email, password)
       .then((data) => auth.getData(data))
       .then((res) => {
         if (res) {
@@ -243,6 +244,7 @@ function App() {
         />
 
         <InfoTooltip
+          name='tooltip'
           isOpen={stateInfoTooltip}
           onClose={closeAllPopups}
           registrationResult={registrationResult}
