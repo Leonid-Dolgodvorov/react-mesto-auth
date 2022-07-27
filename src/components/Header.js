@@ -1,12 +1,12 @@
 import React from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Switch, Route, Link } from "react-router-dom";
 import headerLogoPath from '../images/header-logo.svg';
 
 function Header(props) {
   return (
     <header className="header section page__header">
       <img className="header__logo" src={headerLogoPath} alt="логотип Mesto" />
-      <Routes>
+      <Switch>
         <Route exact path="/sign-in">
           <Link 
             to="/sign-up" 
@@ -35,7 +35,7 @@ function Header(props) {
             </Link>
           </div>          
         </Route>
-      </Routes>
+      </Switch>
     </header>
   )
 }

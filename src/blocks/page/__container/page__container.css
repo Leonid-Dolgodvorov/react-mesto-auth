@@ -1,7 +1,9 @@
 .page__container {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   max-width: 1280px;
-  margin: 0 auto 0;
+  margin: 0 auto;
 }
 
 @media screen and (max-width: 919px) {

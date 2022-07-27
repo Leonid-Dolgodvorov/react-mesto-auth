@@ -8,3 +8,9 @@
   text-decoration: none;
   color: #fff;
 }
+
+@media screen and (max-width: 399px) {
+  .header__link {
+    margin-right: 10px;
+  }
+}

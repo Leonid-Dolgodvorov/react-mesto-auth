@@ -1,6 +1,6 @@
 const BASE_URL = "https://auth.nomoreparties.co";
 
-returnResJson = (res) =>{
+function returnResJson(res) {
   if (res.ok) {
     return res.json();
   }

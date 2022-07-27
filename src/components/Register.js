@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function Register(props) {
-  const [values, setValues] = useState({});
+  const [values, setValues] = React.useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,7 +41,7 @@ function Register(props) {
           value={values.password || ""}
           onChange={handleChange}
         />
-        <button className="auth__form-submit-btn auth__form-submit-btn_size" type="submit">
+        <button className="auth__submit-btn " type="submit">
           Зарегистрироваться
         </button>
         <div className="auth__wrapper">
