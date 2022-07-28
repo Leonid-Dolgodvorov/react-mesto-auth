@@ -36,13 +36,13 @@ function App() {
       auth
         .getData(jwt)        
         .then((res) => {
-          if (res.status === 400 || res.status === 401) {
-            handleSignOut()
+          if (res.data.email) {
+            setLoggedIn(true)
+            setEmail(res.data.email)
+            history.push("/");
           }
           else {
-            setLoggedIn(true);
-            setEmail(res.data.email)
-            getInfo()
+            handleSignOut()
           }
         })
         .catch((err) => {
@@ -51,16 +51,18 @@ function App() {
     }
   }, [])
 
-  const getInfo = () => {
-    Promise.all([api.getUserInfo(), api.getInitialCards()])
-      .then(([userInfo, cardList]) => {
-        setCurrentUser(userInfo);
-        setCards(cardList);
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
+  React.useEffect(() => {
+    if (loggedIn) {
+      Promise.all([api.getUserInfo(), api.getInitialCards()])
+        .then(([userInfo, cardList]) => {
+          setCurrentUser(userInfo);
+          setCards(cardList);
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
+  }, [loggedIn])
   
   const handleCardClick = (card) => {
     setSelectedCard(card)
@@ -149,12 +151,16 @@ function App() {
   }
 
   const handleRegistration = (email, password) => {
-    console.log(email, password)
     auth
       .register(email, password)
-      .then(() => {
-        setRegistrationResult(true);
-        history.push("/sign-in");
+      .then((res) => {
+        if (res.data._id) {
+          setRegistrationResult(true);
+          history.push("/sign-in");
+        }
+        else {
+          setRegistrationResult(false);
+        }
       })
       .catch((err) => {
         setRegistrationResult(false);
@@ -171,13 +177,18 @@ function App() {
       .then((data) => auth.getData(data.token))
       .then((res) => {
         if (res) {
-          setEmail(res.data.email);
+          setEmail(email);
           setLoggedIn(true);
           history.push("/");
+        }
+        else {
+          setRegistrationResult(false);
+          setIsInfoTooltipOpened(true);
         }
       })
       .catch((err) => {
         setRegistrationResult(false);
+        setIsInfoTooltipOpened(true);
         console.log(err)
       })
   };
