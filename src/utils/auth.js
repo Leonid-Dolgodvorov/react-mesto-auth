@@ -8,6 +8,7 @@ function returnResJson(res) {
 }
 
 export const register = (email, password) => {
+  console.log(email, password);
   console.log(JSON.stringify({
     email: email,
     password: password,    
@@ -23,10 +24,16 @@ export const register = (email, password) => {
     }),
   })
     .then(returnResJson)
+    .then(res => console.log(res))
 };
 
 export const authorize = (email, password) => {
-  return fetch(`${BASE_URL}/signup`, {
+  console.log(email, password);
+  console.log(JSON.stringify({
+    email: email,
+    password: password,
+  }))
+  return fetch(`${BASE_URL}/signin`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -141,7 +141,7 @@ function App() {
     auth
       .register(email, password)
       .then(() => {
-        setRegistrationResult(false);
+        setRegistrationResult(true);
         history.push("/sign-in");
       })
       .catch((e) => {
