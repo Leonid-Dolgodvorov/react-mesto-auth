@@ -19,7 +19,6 @@ export const register = (email, password) => {
     }),
   })
     .then(returnResJson)
-    .then(res => console.log(res))
 };
 
 export const authorize = (email, password) => {

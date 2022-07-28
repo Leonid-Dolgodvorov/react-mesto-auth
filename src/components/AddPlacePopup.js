@@ -1,13 +1,13 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
 
-function AddPlacePopup(props) {
+function AddPlacePopup({ isOpen, onAddPlace, onClose, loadingStatus }) {
 
   const [placeInfo, setPlaceInfo] = React.useState({});
 
   React.useEffect(() => {
-    if (props.isOpen) {setPlaceInfo({ place: "", link: "" })}
-  }, [props.isOpen]);
+    if (isOpen) {setPlaceInfo({ place: "", link: "" })}
+  }, [isOpen]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -19,7 +19,7 @@ function AddPlacePopup(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.onAddPlace({
+    onAddPlace({
       name: placeInfo.place,
       link: placeInfo.link,
     });
@@ -29,8 +29,8 @@ function AddPlacePopup(props) {
     <PopupWithForm
       name="place"
       title="Новое место"
-      isOpen={props.isOpen}
-      onClose={props.onClose}
+      isOpen={isOpen}
+      onClose={onClose}
       onSubmit={handleSubmit}
     >
       <div className="popup__input-wrapper">
@@ -67,7 +67,7 @@ function AddPlacePopup(props) {
           className="popup__save-button" 
           type="submit"
         >
-          {props.isLoading ? 'Сохранение...' : 'Создать'}
+          {loadingStatus ? 'Сохранение...' : 'Создать'}
         </button>
     </PopupWithForm>
   );

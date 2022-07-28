@@ -1,24 +1,24 @@
 import PopupWithForm from "./PopupWithForm";
 
-function ConfirmDeletePopup(props) {
+function ConfirmDeletePopup({ onCardDelete, isOpen, onClose, loadingStatus }) {
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.onCardDelete(props.card);
+    onCardDelete(card);
   };
 
   return (
     <PopupWithForm
       name="delete"
       title="Вы уверены?"
-      isOpen={props.isOpen}
-      onClose={props.onClose}
-      onSubmit={props.handleSubmit}
+      isOpen={isOpen}
+      onClose={onClose}
+      onSubmit={handleSubmit}
     >
       <button 
         className="popup__save-button" 
         type="submit" 
       >
-        {props.isLoading ? 'Удаление...' : 'Да'}
+        {loadingStatus ? 'Удаление...' : 'Да'}
       </button>
     </PopupWithForm>
   );

@@ -2,7 +2,7 @@ import React from "react";
 import { Switch, Route, Link } from "react-router-dom";
 import headerLogoPath from '../images/header-logo.svg';
 
-function Header(props) {
+function Header({ email, onSignOut }) {
   return (
     <header className="header section page__header">
       <img className="header__logo" src={headerLogoPath} alt="логотип Mesto" />
@@ -25,11 +25,11 @@ function Header(props) {
         </Route>
         <Route exact path="/">
           <div className="header__wrapper">
-            <p className="header__email">{props.email}</p>
+            <p className="header__email">{email}</p>
             <Link 
               to='/sign-in' 
               className="header__link" 
-              onClick={props.onSignOut}
+              onClick={onSignOut}
             >
               Выйти
             </Link>

@@ -3,15 +3,27 @@ import pencilImage from '../images/pencil.png'
 import Card from './Card'
 import CurrentUserContext from "../contexts/CurrentUserContext";
 
-function Main(props) {
+function Main({ cards, onCardClick, onCardLike, onCardDelete, onEditAvatar, onEditProfile, onAddPlace }) {
 
   const currentUser = React.useContext(CurrentUserContext);
+
+  const cardsElements = cards.map((card) => {
+    return (
+      <li className="card" key={card._id}>
+        <Card 
+          card={card}          
+          onCardClick={onCardClick}
+          onCardLike={onCardLike}
+          onCardDelete={onCardDelete} />
+      </li>
+    )          
+  })
 
   return (
     <main className="page__main">
     <section className="profile section page__profile">
       <div className="profile__info">
-        <div className="profile__avatar-edit" onClick={props.onEditAvatar}>
+        <div className="profile__avatar-edit" onClick={onEditAvatar}>
           <img 
             className="profile__avatar" 
             src={currentUser.avatar}
@@ -26,7 +38,7 @@ function Main(props) {
               className="profile__edit" 
               type="button" 
               aria-label="Редактирование профиля"
-              onClick={props.onEditProfile}
+              onClick={onEditProfile}
             />
           </div>
           <p className="profile__job">{currentUser.about}</p>
@@ -35,21 +47,12 @@ function Main(props) {
       <button 
         className="profile__add-button" 
         type="button" 
-        onClick={props.onAddPlace}
+        onClick={onAddPlace}
       />
     </section>
     <section className="elements section page__elements">
       <ul className="elements__list">
-        {props.cards.map((card) => {
-          return (
-            <Card 
-              card={card}
-              key={card._id}
-              onCardClick={props.onCardClick}
-              onCardLike={props.onCardLike}
-              onCardDelete={props.onCardDelete} />
-          )          
-        })}
+        {cardsElements}
       </ul>
     </section>
     </main>
