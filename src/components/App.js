@@ -156,7 +156,7 @@ function App() {
   const handleAuthorization = (email, password) => {
     auth
       .authorize(email, password)
-      .then((data) => auth.getData(data))
+      .then((data) => auth.getData(data.token))
       .then((res) => {
         if (res) {
           setEmail(res.data.email);
