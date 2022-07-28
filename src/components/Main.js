@@ -8,7 +8,7 @@ function Main(props) {
   const currentUser = React.useContext(CurrentUserContext);
 
   return (
-    <main>
+    <main className="page__main">
     <section className="profile section page__profile">
       <div className="profile__info">
         <div className="profile__avatar-edit" onClick={props.onEditAvatar}>

@@ -1,7 +1,4 @@
 .header__link {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
   font-size: 18px;
   line-height: 22px;
   text-align: right;
@@ -9,8 +6,9 @@
   color: #fff;
 }
 
-@media screen and (max-width: 399px) {
+@media screen and (max-width: 500px) {
   .header__link {
     margin-right: 10px;
+    text-align: center;
   }
 }

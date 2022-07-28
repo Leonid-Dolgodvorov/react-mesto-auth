@@ -33,17 +33,6 @@ function App() {
   const history = useHistory();
 
   React.useEffect(() => {
-    Promise.all([api.getUserInfo(), api.getInitialCards()])
-      .then(([userInfo, cardList]) => {
-        setCurrentUser(userInfo);
-        setCards(cardList);
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }, [])
-
-  React.useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       auth
@@ -53,11 +42,22 @@ function App() {
           setEmail(res.data.email);
           history.push("/");
         })
+        .then(() => {
+          Promise.all([api.getUserInfo(), api.getInitialCards()])
+          .then(([userInfo, cardList]) => {
+            setCurrentUser(userInfo);
+            setCards(cardList);
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+        })
         .catch((err) => {
           console.log(err)
         });
     }
-  }, [history]);
+  }, [history, loggedIn])
+    
 
   const handleCardClick = (card) => {
     setSelectedCard(card)
