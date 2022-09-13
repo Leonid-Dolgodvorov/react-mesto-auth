@@ -33,36 +33,21 @@ function App() {
   React.useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
-      auth
-        .getData(jwt)        
-        .then((res) => {
-          if (res.data.email) {
-            setLoggedIn(true)
-            setEmail(res.data.email)
-            history.push("/");
-          }
-          else {
-            handleSignOut()
-          }
-        })
-        .catch((err) => {
-          console.log(err)
-        });
-    }
-  }, [])
-
-  React.useEffect(() => {
-    if (loggedIn) {
-      Promise.all([api.getUserInfo(), api.getInitialCards()])
+      Promise.all([auth.getData(jwt), api.getInitialCards()])
         .then(([userInfo, cardList]) => {
+          setLoggedIn(true);
+          setEmail(userInfo.email);
           setCurrentUser(userInfo);
-          setCards(cardList);
+          setCards(cardList.data);
+          history.push("/");
         })
         .catch((err) => {
           console.log(err)
         })
-    }
-  }, [loggedIn])
+    } else {
+      handleSignOut()
+    }            
+  }, [])
   
   const handleCardClick = (card) => {
     setSelectedCard(card)
@@ -85,7 +70,7 @@ function App() {
     setLoadingStatus(true)
     api.editUserInfo(data)
       .then((user) => {
-        setCurrentUser(user);
+        setCurrentUser(user.data);
         closeAllPopups();
         setLoadingStatus(false)
       })
@@ -97,8 +82,8 @@ function App() {
   const submitEditAvatar = (data) => {
     setLoadingStatus(true)
     api.editAvatar(data)
-      .then((data) => {
-        setCurrentUser(data);
+      .then((url) => {
+        setCurrentUser(url.data);
         closeAllPopups();
         setLoadingStatus(false)
       })
@@ -117,7 +102,7 @@ function App() {
   }
 
   const handleCardLike = (card) => {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
     api.changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
@@ -130,7 +115,8 @@ function App() {
   const handleCardDelete = (card) => {
     api.deleteCard(card._id)
       .then(() => {
-        setCards(cards => cards.filter((item) => item !== card));
+        setCards((cards) => {
+          return cards.filter((item) => item !== card)});
       })
       .catch((err) => {
         console.log(err)
@@ -141,7 +127,7 @@ function App() {
     setLoadingStatus(true)
     api.addCard(data)
       .then((newCard) => {
-        setCards([newCard, ...cards]);
+        setCards([newCard.data, ...cards]);
         closeAllPopups();
         setLoadingStatus(false)
       })
@@ -154,7 +140,7 @@ function App() {
     auth
       .register(email, password)
       .then((res) => {
-        if (res.data._id) {
+        if (res.data.email) {
           setRegistrationResult(true);
           history.push("/sign-in");
         }

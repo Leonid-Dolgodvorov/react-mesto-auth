@@ -1,4 +1,4 @@
-const BASE_URL = "https://auth.nomoreparties.co";
+const BASE_URL = "https://api.front.dolgodvorov.nomoredomains.sbs";
 
 function returnResJson(res) {
   if (res.ok) {
@@ -49,7 +49,7 @@ export const getData = (token) => {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
-    }
+    },
   })
   .then(returnResJson)
 } 

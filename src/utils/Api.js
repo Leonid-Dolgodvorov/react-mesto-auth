@@ -13,14 +13,16 @@ class Api {
 
   getInitialCards() {
     return fetch(`${this._url}cards`, {
-      headers: this._headers
+      headers: this._headers,
     })
-      .then(res => this.returnResJson(res))
+      .then((res) => {
+        return this.returnResJson(res)
+      })
   }
 
   getUserInfo() {
     return fetch(`${this._url}users/me`, {
-      headers: this._headers
+      headers: this._headers,
     })
       .then(res => this.returnResJson(res))
   }
@@ -63,7 +65,7 @@ class Api {
   deleteCard(cardId) {
     return fetch(`${this._url}cards/${cardId}`, {
       method: 'DELETE',
-      headers: this._headers
+      headers: this._headers,
     })
       .then(res => this.returnResJson(res))
   }
@@ -71,7 +73,7 @@ class Api {
   addLike(cardId) {
     return fetch(`${this._url}cards/likes/${cardId}`, {
       method: 'PUT',
-      headers: this._headers
+      headers: this._headers,
     })
       .then(res => this.returnResJson(res))
   }
@@ -79,25 +81,27 @@ class Api {
   deleteLike(cardId) {
     return fetch(`${this._url}cards/likes/${cardId}`, {
       method: 'DELETE',
-      headers: this._headers
+      headers: this._headers,
     })
       .then(res => this.returnResJson(res))
   }
 
   changeLikeCardStatus(cardId, isLiked) {
-    return fetch(`${this._url}cards/likes/${cardId}`, {
+    return fetch(`${this._url}cards/${cardId}/likes/`, {
       method: `${isLiked ? 'PUT' : 'DELETE'}`,
-      headers: this._headers
+      headers: this._headers,
     })
     .then(res => this.returnResJson(res))
   }
 }
 
+const jwt = localStorage.getItem("jwt");
+
 const api = new Api({
-  url: "https://mesto.nomoreparties.co/v1/cohort-42/",
+  url: "https://api.front.dolgodvorov.nomoredomains.sbs/",
   headers: {
     "Content-Type": "application/json",
-    authorization: "99d52bd8-e655-4215-bbec-aa898a3f57c0",
+    'Authorization': `Bearer ${jwt}`,
   },
 });
 
